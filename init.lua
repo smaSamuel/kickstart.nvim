@@ -1055,3 +1055,11 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.opt_local.expandtab = true
   end,
 })
+
+-- Rodar automaticamente esse comando: "nvim --listen ./godothost" quando se o nvim for aberto em um diretorio de projeto godot
+-- Usa o nvim como editor de script para os arquivos da godot
+local gdproject = io.open(vim.fn.getcwd()..'/project.godot', 'r')
+if gdproject then
+    io.close(gdproject)
+    vim.fn.serverstart './godothost'
+end
